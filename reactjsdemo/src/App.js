@@ -7,7 +7,7 @@ class App extends Component {
     constructor(){
         super()
         this.state = {
-            todoList: 'item2',
+            todoList: ['item2', 'item1'],
             task: ''
         }
     }
@@ -25,22 +25,26 @@ class App extends Component {
                     />
                     <button type='submit'> Add Todo</button>
                 </form>
-                {/* <TaskList title={'Pending Todo'} buttonText={'Done'} tasks={this.state.todoList} buttonFunction={this.removeTodo()} />
-                <TaskList title={'Completed'} buttonText={"Delete"} tasks={'done'} buttonFunction={this.removeTodo()} /> */}
+                 <TaskList title={'Pending Todo'} buttonText={'Done'} tasks={this.state.todoList} buttonFunction={this.removeTodo} />
+                < TaskList title={'Completed'} buttonText={"Delete"} tasks={['done']} buttonFunction={this.removeTodo()} /> 
             </div>
         );
     }
     addTodo(e){
         //this.setState({ todoList: 'item1'});
         e.preventDefault();
-        console.log(this.state.task);
-        this.setState({task: ''});
-        console.log(this.state.task);
+        this.setState({task: '', todoList: [ ...this.state.todoList, this.state.task] });
     }
-    removeTodo(){
-        if(this.state.todoList != null){
-            this.setState({ todoList: null})
+    removeTodo = key =>{
+        let todoList = this.state.todoList;
+        let index = todoList.indexOf(key);
+        if(index > -1){
+            todoList.splice(index,1);
+            this.setState({todoList: todoList});
         }
+    }
+    deleteTodo = key =>{
+        console.log(key);
     }
 }
 
