@@ -8,6 +8,7 @@ class App extends Component {
         super()
         this.state = {
             todoList: ['item2', 'item1'],
+            completedList:['wash dishes', 'take out trash'],
             task: ''
         }
     }
@@ -26,10 +27,11 @@ class App extends Component {
                     <button type='submit'> Add Todo</button>
                 </form>
                  <TaskList title={'Pending Todo'} buttonText={'Done'} tasks={this.state.todoList} buttonFunction={this.removeTodo} />
-                < TaskList title={'Completed'} buttonText={"Delete"} tasks={['done']} buttonFunction={this.removeTodo()} /> 
+                < TaskList title={'Completed'} buttonText={"Delete"} tasks={this.state.completedList} buttonFunction={this.deleteTodo} /> 
             </div>
         );
     }
+    
     addTodo(e){
         //this.setState({ todoList: 'item1'});
         e.preventDefault();
@@ -43,8 +45,16 @@ class App extends Component {
             this.setState({todoList: todoList});
         }
     }
+   
     deleteTodo = key =>{
         console.log(key);
+        let completedList =  this.state.completedList;
+        let index = completedList.indexOf(key);
+        if(index>-1){
+            completedList.splice(index,1);
+            this.setState({completeList:completedList});
+   
+        }
     }
 }
 
