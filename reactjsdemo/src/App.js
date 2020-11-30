@@ -43,6 +43,7 @@ class App extends Component {
         if(index > -1){
             todoList.splice(index,1);
             this.setState({todoList: todoList});
+            this.setState({completedList:[ ...this.state.completedList,key]})
         }
     }
    
